@@ -1,0 +1,33 @@
+body {
+    background-color: white;
+    margin-left: 10px;
+    margin-right: 200px;
+}
+
+h1 {
+    color: black;
+}
+
+h2 {
+    color: black;
+}
+
+h3 {
+    color: black;
+}
+
+span.error {
+    color: red;  
+}
+
+p {
+    color: black;
+}
+
+header {
+    float: right;
+    border: 1px solid;
+    width: 100px;
+    padding: 5 px;
+}
+
