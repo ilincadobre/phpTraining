@@ -2,8 +2,11 @@
 
 namespace Application\Controller;
 
-use Framework\PoolManager;
 use Application\Controller\QuestionController;
+use Framework\PoolManager;
+use Framework\Request;
+use Framework\FlashMessenger;
+use Framework\Token;
 
 class PoolController extends AbstractController {
 
@@ -16,9 +19,9 @@ class PoolController extends AbstractController {
         $this->question = new QuestionController();
     }
 
-    public function add() {
+    public function add(Request $request, FlashMessenger $messenger, Token $token) {
 
-        if ($this->request->post('add_question')) {
+        if ($request->post('add_question')) {
             $validation_items = array(
                 'question' => array('name' => 'question', 'required' => true),
                 'choices' => array('name' => 'choices', 'min' => 3, "max" => 5),
@@ -27,15 +30,14 @@ class PoolController extends AbstractController {
             );
 
             $requested = array(
-                'question' => $this->request->post('question'),
-                'answer' => $this->request->post('answer'),
-                'choices' => $this->getChoiches(),
-                'answers' => $this->getAnswers()
+                'question' => $request->post('question'),
+                'answer' => $request->post('answer'),
+                'choices' => $this->getChoiches($request),
+                'answers' => $this->getAnswers($request)
             );
             $this->manager = $this->manager->check($requested, $validation_items);
             if ($this->manager->getSuccess()) {
-                $success = $this->question->add('questions', $requested);
-                $messenger = $this->getMessenger();
+                $success = $this->question->add('questions', $requested);                
                 if ($success) {
                     $messenger->flash('success', 'Question added successfully!');
                     $this->redirect->to('edit_questions');
@@ -49,31 +51,35 @@ class PoolController extends AbstractController {
         }
     }    
     
-    public function remove() {
-        $questions = $this->question->getQuestionsEntries('questions', 'question');
-        $id = $this->question->getQuestionsEntries('questions', 'id');
-        if ($this->request->post('remove_questions')) {            
+    public function remove(Request $request, FlashMessenger $messenger, Token $token) {
+        $questions = $this->question->getAllItems('questions', 'question');              
+        $ids = $this->question->getAllItems('questions', 'id');  
+        if ($request->post('remove_questions')) {            
             foreach ($questions as $key => $value) {
-                $requested = $this->request->post("question_{$id[$key]}");                 
+                $requested = $request->post("question_{$ids[$key]}");                 
                 if($requested === 'on') {                   
-                     $this->question->remove('questions', 'id', $id[$key]);                 
+                     $this->question->remove('questions', 'id', $ids[$key]);                 
                 }                
             } 
             $this->redirect->to('edit_questions');
         }
         return false;
+    } 
+    
+    public function listAll() {
+        return $this->question->getAllEntries('questions');       
     }
-
-    private function getChoiches() {
+    
+    private function getChoiches(Request $request) {
         for ($i = 1; $i <= 5; $i ++) {
-            $choiches[$i - 1] = $this->request->post("choice{$i}");
+            $choiches[$i - 1] = $request->post("choice{$i}");
         }
         return $choiches;
     }
 
-    private function getAnswers() {
+    private function getAnswers(Request $request) {
         for ($i = 1; $i <= 5; $i ++) {
-            $answers[$i - 1] = $this->request->post("answer{$i}");
+            $answers[$i - 1] = $request->post("answer{$i}");
         }
         return $answers;
     }

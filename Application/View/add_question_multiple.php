@@ -1,12 +1,3 @@
-<?php
-
-namespace Application\Controller;
-
-$question = new PoolController();
-$request = $question->getRequest();
-$errors = $question->add();
-?>
-
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -25,8 +16,8 @@ and open the template in the editor.
             <input type="text" name="question" value="<?php echo htmlspecialchars($request->post('question')); ?>" autocomplete="off">
             <span class="error">
                 <?php
-                if (!empty($errors['question'])) {
-                    echo '* ', $errors['question'];
+                if (!empty($output['question'])) {
+                    echo '* ', $output['question'];
                 }
                 ?>
             </span><br>
@@ -41,11 +32,11 @@ and open the template in the editor.
             </ol>
             <span class="error">
                 <?php
-                if (!empty($errors['choices'])) {
-                    echo '* ', $errors['choices'], PHP_EOL;
+                if (!empty($output['choices'])) {
+                    echo '* ', $output['choices'], PHP_EOL;
                 }
-                if (!empty($errors['answers'])) {
-                    echo '* ', $errors['answers'];
+                if (!empty($output['answers'])) {
+                    echo '* ', $output['answers'];
                 }
                 ?>
             </span><br>

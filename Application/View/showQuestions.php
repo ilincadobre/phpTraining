@@ -1,10 +1,6 @@
-        
 <?php
-
-
-foreach ($table as $key => $value) {
-    echo "<li><input type='checkbox' name='question_{$table[$key]['id']}'>{$table[$key]['question']}</li>";
+foreach ($output as $key => $value) {
+    echo "<input type='checkbox' name='question_{$output[$key]['id']}'>{$key}.{$output[$key]['question']}<br>";
 }
-
-echo 'test';
 ?>
+

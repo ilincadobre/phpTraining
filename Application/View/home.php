@@ -1,9 +1,3 @@
-<?php
-
-namespace Framework;
-
-$messenger = new FlashMessenger();
-?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,19 +5,13 @@ $messenger = new FlashMessenger();
         <title>Test platform</title>
         <link rel="stylesheet" href="../../public/styles/plain.css">
     </head>    
-    <body> 
-        <?php if (!$messenger->get('login')) { ?>
+    <body>         
             <h1>Welcome!</h1>
             Login or register if you don't already have an account.
             <br>
             <br>
-            <a href="index.php?page=login">Login</a> 
+            <a href="index.php?page=login&ctrl=Auth&action=login">Login</a> 
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="index.php?page=register">Sign Up</a>
-        <?php
-        } else {
-            include 'loggedin.php';
-        }
-        ?>            
+            <a href="index.php?page=register&ctrl=Auth&action=register">Sign Up</a>         
     </body>
 </html>

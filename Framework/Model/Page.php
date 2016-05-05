@@ -4,22 +4,20 @@ namespace Framework\Model;
 
 class Page {
 
-    private $pagename;
+    private $name;
     private $content;
-    private $data;
 
-    public function __construct($pagename = null, $content = null, $data = null) {
-        $this->pagename = $pagename;
+    public function __construct($name = null, $content = null) {
+        $this->name = $name;
         $this->content = $content;
-        $this->data = $data;
     }
 
-    public function setName($pagename) {
-        $this->pagename = $pagename;
+    public function setName($name) {
+        $this->name = $name;
     }
 
     public function getName() {
-        return $this->pagename;
+        return $this->name;
     }
 
     public function setContent($content) {
@@ -29,13 +27,4 @@ class Page {
     public function getContent() {
         return $this->content;
     }
-    
-    public function setData($data) {
-        $this->data = $data;
-    }
-    
-    public function getData() {
-        return $this->data;
-    }
-
 }

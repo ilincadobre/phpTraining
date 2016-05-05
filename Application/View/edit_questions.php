@@ -1,5 +1,3 @@
-<?php ?>
-
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -18,11 +16,11 @@ and open the template in the editor.
         <ul>
             <li>Add question
                 <ul>
-                    <li><a href="index.php?page=add_question_standard">Add standard question</a></li>
-                    <li><a href="index.php?page=add_question_multiple">Add multiple choice question</a></li>
+                    <li><a href="index.php?page=add_question_standard&ctrl=PoolController&action=add">Add standard question</a></li>
+                    <li><a href="index.php?page=add_question_multiple&ctrl=PoolController&action=add">Add multiple choice question</a></li>
                 </ul>
             </li>
-            <li><a href="index.php?page=remove_question">Remove question</a></li>
+            <li><a href="index.php?page=remove_question&ctrl=PoolController&action=remove">Remove question</a></li>
         </ul>        
         <a href="index.php?page=admin_profile">Go back to profile</a>
     </body>

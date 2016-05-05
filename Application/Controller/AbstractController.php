@@ -15,10 +15,10 @@ abstract class AbstractController {
     protected $messenger;
 
     public function construct() {
-        $this->request = new Request();
-        $this->token = new Token();
+        //$this->request = new Request();
+        //$this->token = new Token();
         $this->redirect = new Redirect();
-        $this->messenger = new FlashMessenger();
+        //$this->messenger = new FlashMessenger();
     }
 
     public function getRequest() {

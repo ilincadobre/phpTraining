@@ -1,17 +1,3 @@
-<?php
-
-namespace Framework;
-
-use Application\Controller\TestController;
-use Application\Model\Repository\QuestionRepository;
-
-$test = new TestController();
-$questions = new QuestionRepository;
-$table = $questions->getTable('questions', $questions->getDefaultFilename());
-$request = $test->getRequest();
-$create = $test->create();
-?>
-
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -23,30 +9,18 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title>Create test</title>
         <link rel="stylesheet" href="./public/styles/plain.css">
-        <script>
-            /*
-                $('#button_show').click(function() {
-                $.ajax({
-            type: 'POST',
-            url: './Application/View/showQuestions.php',
-            data: {},
-            success: function(response) {
-                $('#show_questions').html(response);
-            }
-        });
-    });*/
-           
+        <script>           
             function showQuestions() {
-                var xhttp = new XMLHttpRequest();
+                var xhttp = new XMLHttpRequest();                
                 xhttp.onreadystatechange = function () {
                     if (xhttp.readyState === 4 && xhttp.status === 200) {
-                        document.getElementById("show_questions").innerHTML = xhttp.responseText;
+                        document.getElementById("show_questions").innerHTML = xhttp.responseText;                         
                     }
                 };
-                xhttp.open("GET", "./Application/View/showQuestions.php", true);
+                document.getElementById("submit_add").disabled = false;
+                xhttp.open("GET", "index.php?page=showQuestions&ctrl=PoolController&action=listAll", true);
                 xhttp.send();
             }
-            
         </script>
     </head>
     <body>   
@@ -56,8 +30,8 @@ and open the template in the editor.
             <input type="text" name="name" value="<?php echo htmlspecialchars($request->post('name')); ?>" autocomplete="off">
             <span class="error">
                 <?php
-                if (!empty($errors['name'])) {
-                    echo '* ', $errors['name'];
+                if (!empty($output['name'])) {
+                    echo '* ', $output['name'];
                 }
                 ?>
             </span>
@@ -65,18 +39,17 @@ and open the template in the editor.
             <textarea name="description" rows="10" cols="50" placeholder="Type the test description here" maxlength=100></textarea>
             <span class="error">
                 <?php
-                if (!empty($errors['description'])) {
-                    echo '* ', $errors['description'];
+                if (!empty($output['description'])) {
+                    echo '* ', $output['description'];
                 }
                 ?>
             </span>
             <br><br>
-            <button type="button" onclick="showQuestions()">Add questions</button>
+            <button type="button" onclick="showQuestions()">Add questions</button><br>            
             <div id="show_questions"></div>           
             <br><br>
-            <input type="submit" name="create_test" value="Done">
+            <input type="submit" id="submit_add" name="create_test" value="Create" disabled>
         </form>
     </body>
 </html>
 
-<!--onclick="showQuestions()"-->

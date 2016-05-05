@@ -1,15 +1,3 @@
-<?php
-
-namespace Framework;
-
-use Application\Controller\Auth;
-
-$logout = new Auth();
-$output = $logout->logout();
-
-//$messenger = new FlashMessenger();
-?>
-
 <!DOCTYPE html>
 <html>
     <head>

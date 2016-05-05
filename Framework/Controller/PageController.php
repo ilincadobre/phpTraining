@@ -1,10 +1,10 @@
 <?php
 
-namespace Framework;
+namespace Framework\Controller;
 
 use \Framework\Model\Page;
 
-class Controller {
+class PageController {
 
     private $page;
 
@@ -12,9 +12,9 @@ class Controller {
         $this->page = $page;
     }
 
-    public function updatePage($pagename, $data=null) {
+    public function update($pagename = null, $content = null) {
         $this->page->setName($pagename);
-        $this->page->setData($data);
+        $this->page->setContent($content);
         return $this->page;
     }
 

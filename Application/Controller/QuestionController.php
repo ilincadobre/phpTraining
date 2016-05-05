@@ -45,13 +45,17 @@ class QuestionController {
         return $this->repository->delete($table, $field, $value);
     }
     
-    public function getQuestionsEntries($tablename, $field) {
+    public function getAllEntries($tablename) {
+        return $table = $this->repository->getTable($tablename, $this->repository->getDefaultFilename());
+    }
+    
+    public function getAllItems($tablename, $field) {
         $table = $this->repository->getTable($tablename, $this->repository->getDefaultFilename());
-        $entries = [];
-        foreach ($table as $key => $value) {
-            $entries[] = $table[$key][$field];
+        $items = [];
+        foreach($table as $key => $value) {
+            $items[] = $table[$key][$field];
         }
-        return $entries;
+        return $items;
     }
 
 }

@@ -1,8 +1,3 @@
-<?php
-namespace Framework;
-
-$messenger = new FlashMessenger();
-?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,15 +6,8 @@ $messenger = new FlashMessenger();
         <link rel="stylesheet" href="../../public/styles/plain.css">
     </head>     
     <body>
-        <h2> You are already logged in. </h2><br>
-        <?php
-        if ($messenger->get('admin')) {
-            $page = 'admin_profile';
-        } else {
-            $page = 'user_profile';
-        }
-        ?>
-        Go back to <a href="<?php echo "index.php?page={$page}"; ?>">Profile</a><br>
-        or         <a href="index.php?page=logout">Logout</a> 
+        <h2> You are logged in. </h2><br>        
+        Please go back to <a href="<?php echo "index.php?page={$output}"; ?>">profile</a><br>
+        or         <a href="index.php?page=logout&ctrl=Auth&action=logout">logout.</a> 
     </body>
 </html>
